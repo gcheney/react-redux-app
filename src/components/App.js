@@ -5,7 +5,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="navigation">    
+                <div className="navigation">
                     <Navigation />
                 </div>
                 <div className="container-fluid">
