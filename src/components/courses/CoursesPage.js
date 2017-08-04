@@ -3,10 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseList from './CourseList';
+import { browserHistory } from 'react-router';
 
 class CoursesPage extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
+    }
+
+    redirectToAddCoursePage() {
+        browserHistory.push('/course');
     }
 
     render() {
@@ -16,6 +22,10 @@ class CoursesPage extends React.Component {
                 <div className="col-md-8 col-md-offset-2">
                     <div className="panel panel-default">
                         <CourseList courses={this.props.courses} />
+                        <input type="submit"
+                            value="Add Course"
+                            className="btn btn-lg btn-primary pull-right"
+                            onClick={this.redirectToAddCoursePage} />
                     </div>
                 </div>
             </div>
@@ -36,7 +46,7 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-CoursesPage.PropTypes = {
+CoursesPage.propTypes = {
     courses: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
