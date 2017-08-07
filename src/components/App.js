@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import Navigation from './common/Navigation';
+import { connect } from 'react-redux';
 
 class App extends React.Component {
     render() {
         return (
             <div>
                 <div className="navigation">
-                    <Navigation />
+                    <Navigation loading={this.props.loading} />
                 </div>
                 <div className="container-fluid">
                     {this.props.children}
@@ -17,7 +18,14 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
-export default App;
+function mapStateToProps(state, ownProps) {
+    return {
+        loading: state.ajaxCallsInProgress > 0
+    };
+}
+
+export default connect(mapStateToProps)(App);
